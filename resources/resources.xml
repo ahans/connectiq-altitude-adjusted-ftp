@@ -1,0 +1,7 @@
+<resources>
+    <settings>
+        <setting propertyKey="userFtp" title="FTP">
+            <settingConfig type="numeric" />
+        </setting>
+    </settings>
+</resources>
