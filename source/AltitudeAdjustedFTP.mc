@@ -4,13 +4,15 @@ using Toybox.System as Sys;
 using Toybox.Time as Time;
 using Toybox.Position as Position;
 
-class DataField extends Ui.DataField
+class DataField extends Ui.SimpleDataField
 {
     var userFtp;
 
     //! Constructor
     function initialize()
     {
+        Ui.SimpleDataField.initialize();
+
         label = "AltAdjFTP";
         //userFtp = Application.getApp().getProperty("userFtp");
         userFtp = 325;
@@ -26,8 +28,13 @@ class DataField extends Ui.DataField
 }
 
 //! main is the primary start point for a Monkeybrains application
-class HeightAdjustedFTP extends App.AppBase
+class AltitudeAdjustedFTP extends App.AppBase
 {
+    function initialize()
+    {
+        App.AppBase.initialize();
+    }
+
     function onStart()
     {
         return false;

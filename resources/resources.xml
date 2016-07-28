@@ -1,6 +1,9 @@
 <resources>
+	<properties>
+		<property id="userFtp" type="number">200</property>
+	</properties>
     <settings>
-        <setting propertyKey="userFtp" title="FTP">
+        <setting propertyKey="@Properties.userFtp" title="@Strings.FTP">
             <settingConfig type="numeric" />
         </setting>
     </settings>
