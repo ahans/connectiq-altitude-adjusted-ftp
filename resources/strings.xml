@@ -1,4 +1,5 @@
 <resources>
     <string id="AppName">Altitude Adjusted FTP</string>
     <string id="FTP">FTP</string>
+    <string id="acclimatized">acclimatized</string>
 </resources>

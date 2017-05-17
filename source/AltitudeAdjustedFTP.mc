@@ -7,6 +7,7 @@ class DataField extends Ui.SimpleDataField
     var userFtp;
     var curAlt;
     var curAltAdjFtp;
+    var acclimatized;
 
     //! Constructor
     function initialize()
@@ -15,6 +16,7 @@ class DataField extends Ui.SimpleDataField
 
         label = "AltAdjFTP";
         userFtp = Application.getApp().getProperty("userFtp");
+        acclimatized = Application.getApp().getProperty("acclimatized");
         curAlt = null;
         curAltAdjFtp = userFtp;
     }
@@ -23,18 +25,18 @@ class DataField extends Ui.SimpleDataField
     function compute(info)
     {
         var newAlt = info.altitude;
-        if (curAlt != newAlt)
-        {
+        if(curAlt != newAlt) {
             curAlt = newAlt;
-            if (curAlt != null)
-            {
+            if(curAlt != null) {
                 var alt_km = curAlt / 1000.0;
-                // formula from http://alex-cycle.blogspot.de/2014/12/wm2-altitude-and-hour-record-part-ii.html
-                curAltAdjFtp = (1 - 0.0092*alt_km*alt_km - 0.0323*alt_km) * userFtp;
+                // formulas from http://alex-cycle.blogspot.de/2014/12/wm2-altitude-and-hour-record-part-ii.html
+                if(acclimatized) {
+                    curAltAdjFtp = (1 - 0.0112*alt_km*alt_km - 0.0190*alt_km) * userFtp;
+                } else {
+                    curAltAdjFtp = (1 - 0.0092*alt_km*alt_km - 0.0323*alt_km) * userFtp;
+                }
                 curAltAdjFtp = curAltAdjFtp.format("%.0f");
-            }
-            else
-            {
+            } else {
                 curAltAdjFtp = "__";
             }
         }
@@ -49,19 +51,17 @@ class AltitudeAdjustedFTP extends App.AppBase
     {
         App.AppBase.initialize();
     }
-
-    function onStart()
+    
+    function onStart(state)
     {
-        return false;
     }
 
+    function onStop(state)
+    {
+    }
+    
     function getInitialView()
     {
         return [new DataField()];
-    }
-
-    function onStop()
-    {
-        return false;
     }
 }
